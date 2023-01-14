@@ -5,7 +5,7 @@ const { LND_GRPC_OPERATION } = require("./operations");
 
 const authenticatedLndOperations = new AuthenticatedLndOperations();
 
-exports.PerformAuthenticatedOperation = async (params) => {
+const PerformAuthenticatedOperation = async (params) => {
   let { operation } = params;
 
   switch (operation) {
@@ -98,3 +98,14 @@ exports.PerformAuthenticatedOperation = async (params) => {
       return { success: false, message: "Invalid operation" };
   }
 };
+
+
+(async () => {
+  try {
+      const text = await PerformAuthenticatedOperation({operation :LND_GRPC_OPERATION.GET_CHANNEL_BALANCE });
+      console.log(text);
+  } catch (e) {
+      // Deal with the fact the chain failed
+  }
+  // `text` is not available here
+})();

@@ -34,7 +34,7 @@ const { tls_cert, macroon } = require("./read_macroon_and_tslcert");
 const {lnd} = authenticatedLndGrpc({
   cert: tls_cert,
   macaroon: macroon,
-  socket: this.socket,
+  socket: "127.0.0.1:10009",
 });
 
 class AuthenticatedLndOperations {
@@ -236,6 +236,7 @@ class AuthenticatedLndOperations {
       let resp = await getChannelBalance({ lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
+      console.log(err)
       return { success: false, message: err };
     }
   };
