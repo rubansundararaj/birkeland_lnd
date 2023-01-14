@@ -3,9 +3,7 @@ const {
 } = require("./authenticated_lnd_operations");
 const { LND_GRPC_OPERATION } = require("./operations");
 
-const authenticatedLndOperations = new AuthenticatedLndOperations(
-  "127.0.0.1:10009"
-);
+const authenticatedLndOperations = new AuthenticatedLndOperations();
 
 exports.PerformAuthenticatedOperation = async (params) => {
   let { operation } = params;
