@@ -105,7 +105,7 @@ const PerformAuthenticatedOperation = async (params) => {
 (async () => {
   try {
       console.log("here we test it");
-      const ind_resp = get_channel_balance();
+      const ind_resp = await get_channel_balance();
       console.log(ind_resp)
       const text = await PerformAuthenticatedOperation({operation :LND_GRPC_OPERATION.GET_CHANNEL_BALANCE });
       
