@@ -1,6 +1,6 @@
 {
   "name": "test_birkeland_lnd",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "birkeland module to talk to lnd ",
   "main": "index.js",
   "scripts": {
