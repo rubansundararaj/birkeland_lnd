@@ -1,5 +1,5 @@
 const {
-  AuthenticatedLndOperations,
+  AuthenticatedLndOperations, get_channel_balance,
 } = require("./authenticated_lnd_operations");
 const { LND_GRPC_OPERATION } = require("./operations");
 
@@ -105,7 +105,10 @@ const PerformAuthenticatedOperation = async (params) => {
 (async () => {
   try {
       console.log("here we test it");
+      const ind_resp = get_channel_balance();
+      console.log(ind_resp)
       const text = await PerformAuthenticatedOperation({operation :LND_GRPC_OPERATION.GET_CHANNEL_BALANCE });
+      
       console.log(text);
   } catch (e) {
       // Deal with the fact the chain failed
