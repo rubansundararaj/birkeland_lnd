@@ -11,7 +11,8 @@ const PerformAuthenticatedOperation = async (params) => {
   switch (operation) {
 
     case LND_GRPC_OPERATION.GET_U_TXOS:
-      return await authenticatedLndOperations.get_u_txos();
+      let get_u_txos_resp = await authenticatedLndOperations.get_u_txos();
+      return get_u_txos_resp;
 
     case LND_GRPC_OPERATION.CREATE_CHAIN_ADDRESS:
       return await authenticatedLndOperations.create_chain_address();
@@ -23,7 +24,8 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.get_channel(req.body);
 
     case LND_GRPC_OPERATION.GET_CHANNEL_BALANCE:
-      return await authenticatedLndOperations.get_channel_balance();
+      let get_channel_balance_resp = await authenticatedLndOperations.get_channel_balance();
+      return get_channel_balance_resp;
 
     case LND_GRPC_OPERATION.GET_CHANNELS:
       return await authenticatedLndOperations.get_channels();
@@ -102,6 +104,7 @@ const PerformAuthenticatedOperation = async (params) => {
 
 (async () => {
   try {
+      console.log("here we test it");
       const text = await PerformAuthenticatedOperation({operation :LND_GRPC_OPERATION.GET_CHANNEL_BALANCE });
       console.log(text);
   } catch (e) {
