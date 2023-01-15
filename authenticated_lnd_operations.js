@@ -370,16 +370,6 @@ class AuthenticatedLndOperations {
   
 }
 }
-const get_channel_balance = async () => {
-  try {
-    console.log("solo")
-    console.log("get_channel_balance");
-    let resp = await getChannelBalance({ lnd:lnd });
-    return { success: true, message: resp };
-  } catch (err) {
-    console.log(err)
-    return { success: false, message: err };
-  }
-};
 
-module.exports={AuthenticatedLndOperations,get_channel_balance}
+
+module.exports={AuthenticatedLndOperations}
