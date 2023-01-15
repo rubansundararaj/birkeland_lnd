@@ -21,7 +21,7 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.get_chain_balance();
 
     case LND_GRPC_OPERATION.GET_CHANNEL:
-      return await authenticatedLndOperations.get_channel(req.body);
+      return await authenticatedLndOperations.get_channel(params);
 
     case LND_GRPC_OPERATION.GET_CHANNEL_BALANCE:
       let get_channel_balance_resp = await authenticatedLndOperations.get_channel_balance();
@@ -34,7 +34,7 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.get_methods();
 
     case LND_GRPC_OPERATION.GET_NODE:
-      return await authenticatedLndOperations.get_node(req.body);
+      return await authenticatedLndOperations.get_node(params);
 
     case LND_GRPC_OPERATION.GET_NETWORK_INFO:
       return await authenticatedLndOperations.get_network_info();
@@ -52,13 +52,13 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.get_public_key();
 
     case LND_GRPC_OPERATION.OPEN_CHANNEL:
-      return await authenticatedLndOperations.open_channel(req.body);
+      return await authenticatedLndOperations.open_channel(params);
 
     case LND_GRPC_OPERATION.ADD_PEER:
-      return await authenticatedLndOperations.add_peer(req.body);
+      return await authenticatedLndOperations.add_peer(params);
 
     case LND_GRPC_OPERATION.PAY:
-      return await authenticatedLndOperations.make_payment(req.body);
+      return await authenticatedLndOperations.make_payment(params);
 
     case LND_GRPC_OPERATION.GET_BACKUP:
       return await authenticatedLndOperations.get_backup();
@@ -70,7 +70,7 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.get_pending_channels();
 
     case LND_GRPC_OPERATION.CREATE_INVOICE:
-      return await authenticatedLndOperations.create_invoice(req.body);
+      return await authenticatedLndOperations.create_invoice(params);
 
     case LND_GRPC_OPERATION.GET_INVOICES:
       return await authenticatedLndOperations.get_invoices();
@@ -79,22 +79,22 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.get_identity();
 
     case LND_GRPC_OPERATION.CANCEL_HODL_INVOICE:
-      return await authenticatedLndOperations.cancel_hodl_invoices(req.body);
+      return await authenticatedLndOperations.cancel_hodl_invoices(params);
 
     case LND_GRPC_OPERATION.PAY_VIA_PAYMENT_DETAILS:
-      return await authenticatedLndOperations.pay_via_payment_details(req.body);
+      return await authenticatedLndOperations.pay_via_payment_details(params);
 
     case LND_GRPC_OPERATION.GET_PAYMENTS:
       return await authenticatedLndOperations.get_payments();
 
     case LND_GRPC_OPERATION.CLOSE_A_CHANNEL:
-      return authenticatedLndOperations.close_a_channel(req.body);
+      return authenticatedLndOperations.close_a_channel(params);
 
     case LND_GRPC_OPERATION.GET_CLOSED_CHANNELS:
       return await authenticatedLndOperations.get_closed_channels();
 
     case LND_GRPC_OPERATION.GET_INVOICE:
-      return await authenticatedLndOperations.get_invoice(req.body);
+      return await authenticatedLndOperations.get_invoice(params);
 
     default:
       return { success: false, message: "Invalid operation" };
