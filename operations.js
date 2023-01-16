@@ -31,4 +31,11 @@ const LND_GRPC_OPERATION = {
     GET_INVOICE: "get_invoice", //28
   };
 
-  module.exports = {LND_GRPC_OPERATION}
+  const LND_GRPC_UNAUTHENTICATED_OPERATION = {
+    GET_WALLET_STATUS : "get_wallet_status", //
+    UNLOCK_WALLET : "un_lock_wallet",
+    CREATE_WALLET : "create_wallet",
+    CREATE_SEED : "create_seed"
+}
+
+  module.exports = {LND_GRPC_OPERATION,LND_GRPC_UNAUTHENTICATED_OPERATION}

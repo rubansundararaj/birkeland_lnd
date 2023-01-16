@@ -1,7 +1,8 @@
 const {
   AuthenticatedLndOperations,
 } = require("./authenticated_lnd_operations");
-const { LND_GRPC_OPERATION } = require("./operations");
+const { LND_GRPC_OPERATION, LND_GRPC_UNAUTHENTICATED_OPERATION } = require("./operations");
+const { UnAuthenticatedLndOperations } = require("./unauthenticated_lnd_operations");
 
 const authenticatedLndOperations = new AuthenticatedLndOperations();
 
@@ -101,6 +102,29 @@ const PerformAuthenticatedOperation = async (params) => {
   }
 };
 
+const unAuthenticatedLndOperations = new UnAuthenticatedLndOperations();
+
+const PerformUnAuthenticatedOperation = async (params) => {
+  let { operation } = params;
+
+  switch (operation) {
+    case LND_GRPC_UNAUTHENTICATED_OPERATION.CREATE_WALLET:
+      let create_wallet_resp = await unAuthenticatedLndOperations.create_wallet(params);
+      return create_wallet_resp;
+    case LND_GRPC_UNAUTHENTICATED_OPERATION.GET_WALLET_STATUS:
+      let get_wallet_status_resp = await unAuthenticatedLndOperations.get_wallet_status();
+      return get_wallet_status_resp;
+    case LND_GRPC_UNAUTHENTICATED_OPERATION.UNLOCK_WALLET:
+      let unlock_wallet_resp = await unAuthenticatedLndOperations.unlock_wallet(params);
+      return unlock_wallet_resp;
+    case LND_GRPC_UNAUTHENTICATED_OPERATION.CREATE_SEED:
+      let create_seed_resp = await unAuthenticatedLndOperations.create_seed();
+      return create_seed_resp;
+    default:
+      return { success: false, message: "Invalid operation" };
+
+  }
+}
 
 
-module.exports={PerformAuthenticatedOperation}
+module.exports={PerformAuthenticatedOperation,PerformUnAuthenticatedOperation}
