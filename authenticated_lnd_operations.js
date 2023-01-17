@@ -169,10 +169,11 @@ class AuthenticatedLndOperations {
     }
   };
   
-  get_u_txos = async () => {
+  get_u_txos = async (params) => {
     try {
+      let {min_confirmations} = params;
       console.log("get_u_txos");
-      let resp = await getUtxos({ lnd:lnd });
+      let resp = await getUtxos({ lnd:lnd,min_confirmations :min_confirmations });
       console.log(resp);
       return { success: true, message: resp };
     } catch (err) {

@@ -12,7 +12,7 @@ const PerformAuthenticatedOperation = async (params) => {
   switch (operation) {
 
     case LND_GRPC_OPERATION.GET_U_TXOS:
-      let get_u_txos_resp = await authenticatedLndOperations.get_u_txos();
+      let get_u_txos_resp = await authenticatedLndOperations.get_u_txos(params);
       return get_u_txos_resp;
 
     case LND_GRPC_OPERATION.CREATE_CHAIN_ADDRESS:
