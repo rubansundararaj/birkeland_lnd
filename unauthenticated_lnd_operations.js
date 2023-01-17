@@ -21,7 +21,7 @@ class UnAuthenticatedLndOperations {
       let resp = await getWalletStatus({ lnd: lnd });
       return { success: true, message: resp };
     } catch (err) {
-      return { success: false, message: JSON.stringify(err) };
+      return { success: false, message: err };
     }
   };
 
@@ -32,7 +32,7 @@ class UnAuthenticatedLndOperations {
       let resp = await unlockWallet({ lnd: lnd, password: password });
       return { success: true, message: resp };
     } catch (err) {
-      return { success: false, message: JSON.stringify(err) };
+      return { success: false, message: err };
     }
   };
 
@@ -45,7 +45,7 @@ class UnAuthenticatedLndOperations {
       resp["seed"] = seed;
       return { success: true, message: resp };
     } catch (err) {
-      return { success: false, message: JSON.stringify(err) };
+      return { success: false, message: err };
     }
   };
 
@@ -55,7 +55,7 @@ class UnAuthenticatedLndOperations {
       let resp = await createSeed({ lnd });
       return { success: true, message: resp };
     } catch (err) {
-      return { success: false, message: JSON.stringify(err) };
+      return { success: false, message: err };
     }
   };
 }
