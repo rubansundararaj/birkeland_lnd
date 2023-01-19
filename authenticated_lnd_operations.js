@@ -336,10 +336,10 @@ class AuthenticatedLndOperations {
   
   create_invoice = async (body) => {
     try {
-      let { mtokens } = body;
+      let { mtokens,description,description_hash } = body;
       console.log("create_invoice");
       console.log(mtokens);
-      let resp = await createInvoice({ lnd:lnd, mtokens: mtokens });
+      let resp = await createInvoice({ lnd:lnd, mtokens: mtokens,description:description,description_hash:description_hash });
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
