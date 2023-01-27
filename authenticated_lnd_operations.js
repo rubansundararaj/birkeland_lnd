@@ -57,7 +57,6 @@ class AuthenticatedLndOperations {
       const resp = await closeChannel({lnd, id });
       return { success: true, message: resp };
     } catch (err) {
-      console.log(err);
       return { success: false, message: err };
     }
   };
@@ -75,7 +74,6 @@ class AuthenticatedLndOperations {
       });
       return { success: true, message: resp };
     } catch (err) {
-      console.log(err);
       return { success: false, message: err };
     }
   };
@@ -88,7 +86,6 @@ class AuthenticatedLndOperations {
       const resp = await cancelHodlInvoice({ request_id_object, lnd });
       return { success: true, message: resp };
     } catch (err) {
-      console.log(err);
       return { success: false, message: err };
     }
   };
@@ -105,7 +102,6 @@ class AuthenticatedLndOperations {
   get_payments = async () => {
     try {
       const resp = await getPayments({lnd });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
@@ -141,12 +137,9 @@ class AuthenticatedLndOperations {
     try {
       console.log("make_payment");
       let { request } = body;
-      console.log(request);
       let resp = await pay({ lnd:lnd, request: request });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
-      console.log(err);
       return { success: false, message: err };
     }
   };
@@ -155,16 +148,13 @@ class AuthenticatedLndOperations {
     try {
       console.log("add_peer");
       let { socket, public_key } = body;
-      console.log(body);
       let resp = await addPeer({
         lnd:lnd,
         public_key: public_key,
         socket: socket,
       });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
-      console.log(err);
       return { success: false, message: err };
     }
   };
@@ -174,7 +164,6 @@ class AuthenticatedLndOperations {
       let {min_confirmations} = params;
       console.log("get_u_txos");
       let resp = await getUtxos({ lnd:lnd,min_confirmations :min_confirmations });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
@@ -185,7 +174,6 @@ class AuthenticatedLndOperations {
     try {
       console.log("create_chain_address");
       let resp = await createChainAddress({ lnd:lnd, format: "p2wpkh" });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
@@ -201,7 +189,6 @@ class AuthenticatedLndOperations {
         partner_public_key: partner_public_key,
         lnd:lnd,
       });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
@@ -212,7 +199,6 @@ class AuthenticatedLndOperations {
     try {
       console.log("get_chain_balance");
       let resp = await getChainBalance({ lnd:lnd});
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
@@ -224,7 +210,6 @@ class AuthenticatedLndOperations {
       console.log("get_channel");
       let { channel_id } = body;
       let resp = await getChannel({ id: channel_id, lnd:lnd });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
@@ -237,7 +222,6 @@ class AuthenticatedLndOperations {
       let resp = await getChannelBalance({ lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
-      console.log(err)
       return { success: false, message: err };
     }
   };
@@ -256,7 +240,6 @@ class AuthenticatedLndOperations {
     try {
       console.log("get_methods");
       let resp = await getMethods({ lnd:lnd });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
@@ -287,10 +270,8 @@ class AuthenticatedLndOperations {
   get_peers = async () => {
     try {
       let resp = await getPeers({ lnd:lnd });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
-      console.log(err);
       return { success: false, message: err };
     }
   };
@@ -338,7 +319,6 @@ class AuthenticatedLndOperations {
     try {
       let { mtokens,description,description_hash } = body;
       console.log("create_invoice");
-      console.log(mtokens);
       let resp = await createInvoice({ lnd:lnd, mtokens: mtokens,description:description,description_hash:description_hash });
       return { success: true, message: resp };
     } catch (err) {
@@ -350,7 +330,6 @@ class AuthenticatedLndOperations {
     try {
       console.log("get_invoices");
       let resp = await getInvoices({ lnd:lnd });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
@@ -363,7 +342,6 @@ class AuthenticatedLndOperations {
       let id = invoice_id;
       console.log("get_invoice");
       let resp = await getInvoice({ id, lnd:lnd });
-      console.log(resp);
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
