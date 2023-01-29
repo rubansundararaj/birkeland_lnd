@@ -28,6 +28,7 @@ const {
   closeChannel,
   getClosedChannels,
   getInvoice,
+  sendToChainAddress
 } = require("lightning");
 const { tls_cert, macroon } = require("./read_macroon_and_tslcert");
 
@@ -61,6 +62,22 @@ class AuthenticatedLndOperations {
     }
   };
   
+
+  send_to_chain_address = async (body) => {
+    try {
+      console.log("send_to_chain_address");
+      let { address, tokens } = body;
+      const resp = await sendToChainAddress({
+        address,
+        lnd,
+        tokens
+      });
+      return { success: true, message: resp };
+    } catch (err) {
+      return { success: false, message: err };
+    }
+  };
+
   pay_via_payment_details = async (body) => {
     try {
       console.log("pay_via_payment_details");

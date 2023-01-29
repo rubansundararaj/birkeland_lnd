@@ -29,6 +29,7 @@ const LND_GRPC_OPERATION = {
     CLOSE_A_CHANNEL: "close_a_channel", //26
     GET_CLOSED_CHANNELS: "get_closed_channels", //27
     GET_INVOICE: "get_invoice", //28
+    SEND_TO_CHAIN_ADDRESS : "send_to_chain_address" //29
   };
 
   const LND_GRPC_UNAUTHENTICATED_OPERATION = {

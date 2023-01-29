@@ -97,6 +97,9 @@ const PerformAuthenticatedOperation = async (params) => {
     case LND_GRPC_OPERATION.GET_INVOICE:
       return await authenticatedLndOperations.get_invoice(params);
 
+    case LND_GRPC_OPERATION.SEND_TO_CHAIN_ADDRESS:
+      return await authenticatedLndOperations.send_to_chain_address(params);
+ 
     default:
       return { success: false, message: "Invalid operation" };
   }
