@@ -67,11 +67,14 @@ class AuthenticatedLndOperations {
     try {
       console.log("send_to_chain_address");
       let { address, tokens } = body;
-      const resp = await sendToChainAddress({
-        address,
+
+      let params_object = {
+        "address" : address,
         lnd,
-        tokens
-      });
+        "tokens" : parseInt(tokens)
+      };
+
+      const resp = await sendToChainAddress(params_object);
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
