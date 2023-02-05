@@ -5,19 +5,37 @@ const {
   createWallet,
   createSeed,
 } = require("lightning");
+const fs = require("fs");
 
-const { tls_cert } = require("./read_macroon_and_tslcert");
 
-const { lnd } = unauthenticatedLndGrpc({
-  cert: tls_cert,
-  socket: "127.0.0.1:10009",
-});
 
 class UnAuthenticatedLndOperations {
+
+  get_unauthenticated_lnd = () =>{
+
+    try{
+      const tls_cert = fs.readFileSync("/etc/birkeland/tlscert", {
+        encoding: "utf8",
+        flag: "r",
+      });
+  
+      const { lnd } = unauthenticatedLndGrpc({
+        cert: tls_cert,
+        socket: "127.0.0.1:10009",
+      });
+  
+      return lnd;
+    }
+    catch(err){
+      
+    }
+    
+  }
 
   get_wallet_status = async () => {
     try {
       console.log("get_wallet_status");
+      let lnd = get_unauthenticated_lnd();
       let resp = await getWalletStatus({ lnd: lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -29,6 +47,7 @@ class UnAuthenticatedLndOperations {
     try {
       console.log("unlock_wallet");
       let { password } = params;
+      let lnd = get_unauthenticated_lnd();
       let resp = await unlockWallet({ lnd: lnd, password: password });
       return { success: true, message: resp };
     } catch (err) {
@@ -40,6 +59,7 @@ class UnAuthenticatedLndOperations {
     try { 
       console.log("create_wallet");
       let { password } = params;
+      let lnd = get_unauthenticated_lnd();
       const { seed } = await createSeed({ lnd });
       let resp = await createWallet({ lnd: lnd, seed, password: password });
       resp["seed"] = seed;
@@ -52,6 +72,7 @@ class UnAuthenticatedLndOperations {
   create_seed = async () => {
     try { 
       console.log("create_seed");
+      let lnd = get_unauthenticated_lnd();
       let resp = await createSeed({ lnd });
       return { success: true, message: resp };
     } catch (err) {

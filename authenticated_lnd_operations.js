@@ -30,19 +30,41 @@ const {
   getInvoice,
   sendToChainAddress
 } = require("lightning");
-const { tls_cert, macroon } = require("./read_macroon_and_tslcert");
+const fs = require("fs");
 
-const {lnd} = authenticatedLndGrpc({
-  cert: tls_cert,
-  macaroon: macroon,
-  socket: "127.0.0.1:10009",
-});
 
 class AuthenticatedLndOperations {
+
+
+  get_authenticated_lnd = () =>{
+
+    const tls_cert = fs.readFileSync("/etc/birkeland/tlscert", {
+      encoding: "utf8",
+      flag: "r",
+    });
+    
+    const macroon = fs.readFileSync(
+      "/etc/birkeland/btc_admin_macroon",
+      {
+        encoding: "utf8",
+        flag: "r",
+      }
+    );
+
+    const {lnd} = authenticatedLndGrpc({
+      cert: tls_cert,
+      macaroon: macroon,
+      socket: "127.0.0.1:10009",
+    });
+
+    return lnd;
+  }
+
 
   get_closed_channels = async () => {
     try {
       console.log("get_closed_channels");
+      let lnd = get_authenticated_lnd();
       const resp = await getClosedChannels({lnd});
       return { success: true, message: resp };
     } catch (err) {
@@ -55,6 +77,7 @@ class AuthenticatedLndOperations {
       console.log("close_a_channel");
       let { channel_id } = body;
       let id = channel_id;
+      let lnd = get_authenticated_lnd();
       const resp = await closeChannel({lnd, id });
       return { success: true, message: resp };
     } catch (err) {
@@ -67,7 +90,7 @@ class AuthenticatedLndOperations {
     try {
       console.log("send_to_chain_address");
       let { address, tokens } = body;
-
+      let lnd = get_authenticated_lnd();
       let params_object = {
         "address" : address,
         lnd,
@@ -86,6 +109,7 @@ class AuthenticatedLndOperations {
       console.log("pay_via_payment_details");
       let { request_id, destination, token } = body;
       let request_id_object = { id: request_id };
+      let lnd = get_authenticated_lnd();
       const resp = await payViaPaymentDetails({
         request_id_object,
         destination,
@@ -103,6 +127,7 @@ class AuthenticatedLndOperations {
       console.log("cancel_hodl_invoices");
       let { request_id } = body;
       let request_id_object = { id: request_id };
+      let lnd = get_authenticated_lnd();
       const resp = await cancelHodlInvoice({ request_id_object, lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -112,6 +137,7 @@ class AuthenticatedLndOperations {
   
   get_identity = async () => {
     try {
+      let lnd = get_authenticated_lnd();
       const resp = await getIdentity({ lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -121,6 +147,7 @@ class AuthenticatedLndOperations {
   
   get_payments = async () => {
     try {
+      let lnd = get_authenticated_lnd();
       const resp = await getPayments({lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -130,8 +157,8 @@ class AuthenticatedLndOperations {
   
   get_backups = async () => {
     try {
+      let lnd = get_authenticated_lnd();
       const resp = await getBackups({lnd });
-  
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };
@@ -140,6 +167,7 @@ class AuthenticatedLndOperations {
   
   get_backup = async () => {
     try {
+      let lnd = get_authenticated_lnd();
       const [channel] = (await getChannels({lnd })).channels;
       const resp = await getBackup({
         lnd:lnd,
@@ -157,6 +185,7 @@ class AuthenticatedLndOperations {
     try {
       console.log("make_payment");
       let { request } = body;
+      let lnd = get_authenticated_lnd();
       let resp = await pay({ lnd:lnd, request: request });
       return { success: true, message: resp };
     } catch (err) {
@@ -168,6 +197,7 @@ class AuthenticatedLndOperations {
     try {
       console.log("add_peer");
       let { socket, public_key } = body;
+      let lnd = get_authenticated_lnd();
       let resp = await addPeer({
         lnd:lnd,
         public_key: public_key,
@@ -183,6 +213,7 @@ class AuthenticatedLndOperations {
     try {
       let {min_confirmations} = params;
       console.log("get_u_txos");
+      let lnd = get_authenticated_lnd();
       let resp = await getUtxos({ lnd:lnd,min_confirmations :min_confirmations });
       return { success: true, message: resp };
     } catch (err) {
@@ -193,6 +224,7 @@ class AuthenticatedLndOperations {
   create_chain_address = async () => {
     try {
       console.log("create_chain_address");
+      let lnd = get_authenticated_lnd();
       let resp = await createChainAddress({ lnd:lnd, format: "p2wpkh" });
       return { success: true, message: resp };
     } catch (err) {
@@ -204,6 +236,7 @@ class AuthenticatedLndOperations {
     try {
       let { local_tokens, partner_public_key } = body;
       console.log("open_channel");
+      let lnd = get_authenticated_lnd();
       let resp = await openChannel({
         local_tokens: local_tokens,
         partner_public_key: partner_public_key,
@@ -218,6 +251,7 @@ class AuthenticatedLndOperations {
   get_chain_balance = async () => {
     try {
       console.log("get_chain_balance");
+      let lnd = get_authenticated_lnd();
       let resp = await getChainBalance({ lnd:lnd});
       return { success: true, message: resp };
     } catch (err) {
@@ -229,6 +263,7 @@ class AuthenticatedLndOperations {
     try {
       console.log("get_channel");
       let { channel_id } = body;
+      let lnd = get_authenticated_lnd();
       let resp = await getChannel({ id: channel_id, lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -239,6 +274,7 @@ class AuthenticatedLndOperations {
   get_channel_balance = async () => {
     try {
       console.log("get_channel_balance");
+      let lnd = get_authenticated_lnd();
       let resp = await getChannelBalance({ lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -249,6 +285,7 @@ class AuthenticatedLndOperations {
   get_channels = async () => {
     try {
       console.log("get_channels");
+      let lnd = get_authenticated_lnd();
       let resp = await getChannels({ lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -259,6 +296,7 @@ class AuthenticatedLndOperations {
   get_methods = async () => {
     try {
       console.log("get_methods");
+      let lnd = get_authenticated_lnd();
       let resp = await getMethods({ lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -270,6 +308,7 @@ class AuthenticatedLndOperations {
     try {
       let { public_key } = body;
       console.log("get_node");
+      let lnd = get_authenticated_lnd();
       let resp = await getNode({ lnd:lnd, public_key: public_key });
       return { success: true, message: resp };
     } catch (err) {
@@ -280,6 +319,7 @@ class AuthenticatedLndOperations {
  get_network_info = async () => {
     try {
       console.log("get_network_info");
+      let lnd = get_authenticated_lnd();
       let resp = await getNetworkInfo({ lnd:lnd});
       return { success: true, message: resp };
     } catch (err) {
@@ -289,6 +329,7 @@ class AuthenticatedLndOperations {
   
   get_peers = async () => {
     try {
+      let lnd = get_authenticated_lnd();
       let resp = await getPeers({ lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -298,6 +339,7 @@ class AuthenticatedLndOperations {
   
   get_wallet_version = async () => {
     try {
+      let lnd = get_authenticated_lnd();
       let resp = await getWalletVersion({ lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -308,6 +350,7 @@ class AuthenticatedLndOperations {
   get_wallet_info = async () => {
     try {
       console.log("get_wallet_info");
+      let lnd = get_authenticated_lnd();
       let resp = await getWalletInfo({ lnd:lnd});
       return { success: true, message: resp };
     } catch (err) {
@@ -318,6 +361,7 @@ class AuthenticatedLndOperations {
   get_pending_channels = async () => {
     try {
       console.log("get_pending_channels");
+      let lnd = get_authenticated_lnd();
       let resp = await getPendingChannels({ lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -328,6 +372,7 @@ class AuthenticatedLndOperations {
   get_public_key = async () => {
     try {
       console.log("get_public_key");
+      let lnd = get_authenticated_lnd();
       let resp = await getPublicKey({ family: 1, index: 1, lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -339,6 +384,7 @@ class AuthenticatedLndOperations {
     try {
       let { mtokens,description,description_hash } = body;
       console.log("create_invoice");
+      let lnd = get_authenticated_lnd();
       let resp = await createInvoice({ lnd:lnd, mtokens: mtokens,description:description,description_hash:description_hash });
       return { success: true, message: resp };
     } catch (err) {
@@ -349,6 +395,7 @@ class AuthenticatedLndOperations {
   get_invoices = async () => {
     try {
       console.log("get_invoices");
+      let lnd = get_authenticated_lnd();
       let resp = await getInvoices({ lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
@@ -361,6 +408,7 @@ class AuthenticatedLndOperations {
       let { invoice_id } = body;
       let id = invoice_id;
       console.log("get_invoice");
+      let lnd = get_authenticated_lnd();
       let resp = await getInvoice({ id, lnd:lnd });
       return { success: true, message: resp };
     } catch (err) {
