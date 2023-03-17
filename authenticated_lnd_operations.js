@@ -28,7 +28,16 @@ const {
   closeChannel,
   getClosedChannels,
   getInvoice,
-  sendToChainAddress
+  sendToChainAddress,
+  getNetworkGraph,
+  getNetworkCentrality,
+  getFeeRates,
+  getForwardingReputations,
+  getForwardingConfidence,
+  getForwards,
+  getPathfindingSettings,
+  getPayment,
+  getRouteToDestination
 } = require("lightning");
 const fs = require("fs");
 
@@ -84,6 +93,84 @@ class AuthenticatedLndOperations {
       return { success: false, message: err };
     }
   };
+
+  get_network_graph = async() =>{
+    try {
+      console.log("get_network_graph");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getNetworkGraph({ lnd:lnd});
+      return { success: true, message: resp };
+    } catch (err) {
+      return { success: false, message: err };
+    }
+  }
+
+  get_network_centrality = async() =>{
+    try {
+      console.log("get_network_centrality");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getNetworkCentrality({ lnd:lnd});
+      return { success: true, message: resp };
+    } catch (err) {
+      return { success: false, message: err };
+    }
+  }
+
+  get_fee_rates = async() =>{
+    try {
+      console.log("get_fee_rates");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getFeeRates({ lnd:lnd});
+      return { success: true, message: resp };
+    } catch (err) {
+      return { success: false, message: err };
+    }
+  }
+
+  get_forwading_reputation = async() =>{
+    try {
+      console.log("get_forwading_reputation");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getForwardingReputations({ lnd:lnd});
+      return { success: true, message: resp };
+    } catch (err) {
+      return { success: false, message: err };
+    }
+  }
+
+  get_forwading_confidence = async(body) =>{
+    try {
+      let { from,to,mtokens } = body;
+      console.log("get_forwading_confidence");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getForwardingConfidence({ lnd:lnd, from:from,to:to,mtokens:mtokens});
+      return { success: true, message: resp };
+    } catch (err) {
+      return { success: false, message: err };
+    }
+  }
+
+  get_forwards = async () =>{
+    try {
+      console.log("get_forwards");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getForwards({ lnd:lnd});
+      return { success: true, message: resp };
+    } catch (err) {
+      return { success: false, message: err };
+    }
+  }
+
+  get_path_finding_settings = async () =>{
+    try {
+      console.log("get_path_finding_settings");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getPathfindingSettings({ lnd:lnd});
+      return { success: true, message: resp };
+    } catch (err) {
+      return { success: false, message: err };
+    }
+  }
   
 
   send_to_chain_address = async (body) => {
@@ -154,6 +241,28 @@ class AuthenticatedLndOperations {
       return { success: false, message: err };
     }
   };
+
+  get_payment = async (body) => {
+    try {
+      let id= {body}
+      let lnd = this.get_authenticated_lnd();
+      const resp = await getPayment({lnd :lnd,id:id });
+      return { success: true, message: resp };
+    } catch (err) {
+      return { success: false, message: err };
+    }
+  };
+
+  get_route_to_destination = async(body) =>{
+    try {
+      let {destination,tokens}= {body};
+      let lnd = this.get_authenticated_lnd();
+      const resp = await getRouteToDestination({lnd :lnd,destination:destination,tokens:tokens });
+      return { success: true, message: resp };
+    } catch (err) {
+      return { success: false, message: err };
+    }
+  }
   
   get_backups = async () => {
     try {

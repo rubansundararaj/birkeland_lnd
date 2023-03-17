@@ -99,7 +99,35 @@ const PerformAuthenticatedOperation = async (params) => {
 
     case LND_GRPC_OPERATION.SEND_TO_CHAIN_ADDRESS:
       return await authenticatedLndOperations.send_to_chain_address(params);
+
+     ////// 
+    case LND_GRPC_OPERATION.GET_NETWORK_GRAPH:
+      return await authenticatedLndOperations.get_network_graph();
+    
+    case LND_GRPC_OPERATION.GET_NETWORK_CENTRALITY:
+      return await authenticatedLndOperations.get_network_centrality();
+
+    case LND_GRPC_OPERATION.GET_FEE_RATES:
+      return await authenticatedLndOperations.get_fee_rates();
+
+    case LND_GRPC_OPERATION.GET_FORWARDING_REPUTATIONS:
+      return await authenticatedLndOperations.get_forwading_reputation();
  
+    case LND_GRPC_OPERATION.GET_FORWARDING_CONFIDENCE:
+      return await authenticatedLndOperations.get_forwading_confidence(params);
+ 
+    case LND_GRPC_OPERATION.GET_FORWARDS:
+      return await authenticatedLndOperations.get_forwards();
+
+    case LND_GRPC_OPERATION.GET_PATH_FINDING_SETTINGS:
+      return await authenticatedLndOperations.get_path_finding_settings();
+
+    case LND_GRPC_OPERATION.GET_PAYMENT:
+      return await authenticatedLndOperations.get_payment(params);
+  
+    case LND_GRPC_OPERATION.GET_ROUTE_TO_DESTINATION:
+      return await authenticatedLndOperations.get_route_to_destination(params);
+   
     default:
       return { success: false, message: "Invalid operation" };
   }

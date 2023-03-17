@@ -29,7 +29,16 @@ const LND_GRPC_OPERATION = {
     CLOSE_A_CHANNEL: "close_a_channel", //26
     GET_CLOSED_CHANNELS: "get_closed_channels", //27
     GET_INVOICE: "get_invoice", //28
-    SEND_TO_CHAIN_ADDRESS : "send_to_chain_address" //29
+    SEND_TO_CHAIN_ADDRESS : "send_to_chain_address", //29
+    GET_NETWORK_GRAPH : "get_network_graph", //30
+    GET_NETWORK_CENTRALITY :"get_network_centrality",//31
+    GET_FEE_RATES : "get_fee_rates",//32
+    GET_FORWARDING_REPUTATIONS:"get_forwarding_reputations",//33
+    GET_FORWARDING_CONFIDENCE:"get_forwarding_confidence",//34
+    GET_FORWARDS : "get_forwards",//35
+    GET_PATH_FINDING_SETTINGS :"get_path_finding_settings",//36
+    GET_PAYMENT : "get_payment",//37
+    GET_ROUTE_TO_DESTINATION : "get_route_to_destination"//38
   };
 
   const LND_GRPC_UNAUTHENTICATED_OPERATION = {
