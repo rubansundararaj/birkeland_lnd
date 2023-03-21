@@ -244,7 +244,7 @@ class AuthenticatedLndOperations {
 
   get_payment = async (body) => {
     try {
-      let id= {body}
+      let {id}= body;
       let lnd = this.get_authenticated_lnd();
       const resp = await getPayment({lnd :lnd,id:id });
       return { success: true, message: resp };
@@ -255,7 +255,7 @@ class AuthenticatedLndOperations {
 
   get_route_to_destination = async(body) =>{
     try {
-      let {destination,tokens}= {body};
+      let {destination,tokens}= body;
       let lnd = this.get_authenticated_lnd();
       const resp = await getRouteToDestination({lnd :lnd,destination:destination,tokens:tokens });
       return { success: true, message: resp };
