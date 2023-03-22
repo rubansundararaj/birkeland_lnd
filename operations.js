@@ -38,7 +38,11 @@ const LND_GRPC_OPERATION = {
     GET_FORWARDS : "get_forwards",//35
     GET_PATH_FINDING_SETTINGS :"get_path_finding_settings",//36
     GET_PAYMENT : "get_payment",//37
-    GET_ROUTE_TO_DESTINATION : "get_route_to_destination"//38
+    GET_ROUTE_TO_DESTINATION : "get_route_to_destination",//38
+    IS_DESTINATION_PAYABLE : "is_destination_payable",//39
+    PROBE_FOR_ROUTE : "probe_for_route",//40
+    PAY_VIA_ROUTES : "pay_via_routes", //41,
+    DECODE_PAYMENT_REQUEST : "decode_payment_request", //42
   };
 
   const LND_GRPC_UNAUTHENTICATED_OPERATION = {
