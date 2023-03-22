@@ -1,6 +1,6 @@
 {
   "name": "test_birkeland_lnd",
-  "version": "0.0.17",
+  "version": "0.0.22",
   "description": "birkeland module to talk to lnd ",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,6 @@
   "author": "Ruban Sundara Raj <rubansundararaj@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "lightning": "^7.0.4"
+    "lightning": "^7.1.4"
   }
 }

@@ -255,9 +255,10 @@ class AuthenticatedLndOperations {
 
   get_route_to_destination = async (body) => {
     try {
-      let { destination, tokens } = body;
+      let { destination, tokens, payment } = body;
       let lnd = this.get_authenticated_lnd();
       const resp = await getRouteToDestination({
+        payment : payment,
         lnd: lnd,
         destination: destination,
         tokens: tokens,
@@ -585,14 +586,21 @@ class AuthenticatedLndOperations {
 
   pay_via_routes = async(body) =>{
     try{
-      let {destination, tokens} = body;
+      let {destination, tokens,id} = body;
       console.log("pay_via_routes");
       let lnd = this.get_authenticated_lnd();
       const {route} = await getRouteToDestination({destination, lnd, tokens});
-      let resp = await payViaRoutes({lnd,route}).secret;
+      console.log("After getting routes");
+      console.log(route);
+      console.log("Route object");
+      console.log({routes: [route]})
+      let resp = await payViaRoutes({ lnd :lnd, routes: [route]});
+      console.log(resp)
       return { success: true, message: resp };
     }
     catch(err){
+      console.log("Error in payvia routes")
+      console.log(err);
       return { success: false, message: err };
     }
   }
