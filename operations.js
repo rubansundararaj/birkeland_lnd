@@ -43,6 +43,7 @@ const LND_GRPC_OPERATION = {
     PROBE_FOR_ROUTE : "probe_for_route",//40
     PAY_VIA_ROUTES : "pay_via_routes", //41,
     DECODE_PAYMENT_REQUEST : "decode_payment_request", //42
+    PAY_VIA_PATH : "pay_via_path"
   };
 
   const LND_GRPC_UNAUTHENTICATED_OPERATION = {

@@ -586,21 +586,30 @@ class AuthenticatedLndOperations {
 
   pay_via_routes = async(body) =>{
     try{
-      let {destination, tokens,id} = body;
-      console.log("pay_via_routes");
+      console.log("pay_via_routes under dev")
+      let {destination, tokens,id,payment} = body;
       let lnd = this.get_authenticated_lnd();
-      const {route} = await getRouteToDestination({destination, lnd, tokens});
-      console.log("After getting routes");
-      console.log(route);
-      console.log("Route object");
-      console.log({routes: [route]})
-      let resp = await payViaRoutes({ lnd :lnd, routes: [route]});
-      console.log(resp)
+      const {route} = await getRouteToDestination({destination:destination, lnd:lnd,payment:payment,tokens: tokens,total_mtokens : tokens*1000});
+      const preimage = (await payViaRoutes({id:id, payment:payment, lnd:lnd, routes: [route]})).secret;
+      return { success: true, message: preimage };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+
+  pay_via_path = async(body) =>{
+    try{
+      console.log("pay_via_path")
+      let {request,destination} = body;
+      let lnd = this.get_authenticated_lnd();
+      let {tokens,id,payment} = await decodePaymentRequest({ lnd: lnd, request: request });
+      const {route} = await getRouteToDestination({destination:destination, lnd:lnd,payment:payment,tokens: tokens,total_mtokens : tokens*1000});
+      let path = {id:id, routes : [route]}
+      const resp = await pay({lnd:lnd, path: path});
       return { success: true, message: resp };
     }
     catch(err){
-      console.log("Error in payvia routes")
-      console.log(err);
       return { success: false, message: err };
     }
   }

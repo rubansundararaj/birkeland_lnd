@@ -139,6 +139,11 @@ const PerformAuthenticatedOperation = async (params) => {
 
     case LND_GRPC_OPERATION.DECODE_PAYMENT_REQUEST:
       return await authenticatedLndOperations.decode_payment_request(params);
+
+    case LND_GRPC_OPERATION.PAY_VIA_PATH:
+      return await authenticatedLndOperations.pay_via_path(params);
+
+      
    
     default:
       return { success: false, message: "Invalid operation" };
