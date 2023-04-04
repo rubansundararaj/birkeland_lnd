@@ -143,8 +143,15 @@ const PerformAuthenticatedOperation = async (params) => {
     case LND_GRPC_OPERATION.PAY_VIA_PATH:
       return await authenticatedLndOperations.pay_via_path(params);
 
-      
-   
+    case LND_GRPC_OPERATION.REMOVE_PEER:
+      return await authenticatedLndOperations.remove_peer(params);
+
+    case LND_GRPC_OPERATION.GET_PENDING_CHAIN_BALANCE:
+      return await authenticatedLndOperations.get_pending_chain_balance();
+    
+    case LND_GRPC_OPERATION.GET_PENDING_PAYMENTS:
+      return await authenticatedLndOperations.get_pending_payments();
+  
     default:
       return { success: false, message: "Invalid operation" };
   }

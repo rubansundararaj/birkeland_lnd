@@ -42,6 +42,9 @@ const {
   isDestinationPayable,
   decodePaymentRequest,
   payViaRoutes,
+  removePeer,
+  getPendingChainBalance,
+  getPendingPayments,
 } = require("lightning");
 const fs = require("fs");
 
@@ -601,9 +604,9 @@ class AuthenticatedLndOperations {
   pay_via_path = async(body) =>{
     try{
       console.log("pay_via_path")
-      let {request,destination} = body;
+      let {request} = body;
       let lnd = this.get_authenticated_lnd();
-      let {tokens,id,payment} = await decodePaymentRequest({ lnd: lnd, request: request });
+      let {tokens,id,payment,destination} = await decodePaymentRequest({ lnd: lnd, request: request });
       const {route} = await getRouteToDestination({destination:destination, lnd:lnd,payment:payment,tokens: tokens,total_mtokens : tokens*1000});
       let path = {id:id, routes : [route]}
       const resp = await pay({lnd:lnd, path: path});
@@ -612,6 +615,44 @@ class AuthenticatedLndOperations {
     catch(err){
       return { success: false, message: err };
     }
+  }
+
+  remove_peer = async(body) =>{
+    try{
+      let {public_key} = body;
+      console.log("remove_peer");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await removePeer({lnd: lnd, public_key: public_key});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+
+  get_pending_chain_balance = async() =>{
+    try{
+      console.log("get_pending_chain_balance");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getPendingChainBalance({lnd: lnd});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+
+  get_pending_payments = async() =>{
+    try{
+      console.log("get_pending_payments");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getPendingPayments({lnd: lnd});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+
   }
 }
 
