@@ -16,41 +16,41 @@ const PerformAuthenticatedOperation = async (params) => {
       return get_u_txos_resp;
 
     case LND_GRPC_OPERATION.CREATE_CHAIN_ADDRESS:
-      return await authenticatedLndOperations.create_chain_address();
+      return await authenticatedLndOperations.create_chain_address(params);
 
     case LND_GRPC_OPERATION.GET_CHAIN_BALANCE:
-      return await authenticatedLndOperations.get_chain_balance();
+      return await authenticatedLndOperations.get_chain_balance(params);
 
     case LND_GRPC_OPERATION.GET_CHANNEL:
       return await authenticatedLndOperations.get_channel(params);
 
     case LND_GRPC_OPERATION.GET_CHANNEL_BALANCE:
-      let get_channel_balance_resp = await authenticatedLndOperations.get_channel_balance();
+      let get_channel_balance_resp = await authenticatedLndOperations.get_channel_balance(params);
       return get_channel_balance_resp;
 
     case LND_GRPC_OPERATION.GET_CHANNELS:
-      return await authenticatedLndOperations.get_channels();
+      return await authenticatedLndOperations.get_channels(params);
 
     case LND_GRPC_OPERATION.GET_METHODS:
-      return await authenticatedLndOperations.get_methods();
+      return await authenticatedLndOperations.get_methods(params);
 
     case LND_GRPC_OPERATION.GET_NODE:
       return await authenticatedLndOperations.get_node(params);
 
     case LND_GRPC_OPERATION.GET_NETWORK_INFO:
-      return await authenticatedLndOperations.get_network_info();
+      return await authenticatedLndOperations.get_network_info(params);
 
     case LND_GRPC_OPERATION.GET_PEERS:
-      return await authenticatedLndOperations.get_peers();
+      return await authenticatedLndOperations.get_peers(params);
 
     case LND_GRPC_OPERATION.GET_WALLET_VERSION:
-      return await authenticatedLndOperations.get_wallet_version();
+      return await authenticatedLndOperations.get_wallet_version(params);
 
     case LND_GRPC_OPERATION.GET_WALLET_INFO:
-      return await authenticatedLndOperations.get_wallet_info();
+      return await authenticatedLndOperations.get_wallet_info(params);
 
     case LND_GRPC_OPERATION.GET_PUBLIC_KEY:
-      return await authenticatedLndOperations.get_public_key();
+      return await authenticatedLndOperations.get_public_key(params);
 
     case LND_GRPC_OPERATION.OPEN_CHANNEL:
       return await authenticatedLndOperations.open_channel(params);
@@ -62,22 +62,22 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.make_payment(params);
 
     case LND_GRPC_OPERATION.GET_BACKUP:
-      return await authenticatedLndOperations.get_backup();
+      return await authenticatedLndOperations.get_backup(params);
 
     case LND_GRPC_OPERATION.GET_BACKUPS:
-      return await authenticatedLndOperations.get_backups();
+      return await authenticatedLndOperations.get_backups(params);
 
     case LND_GRPC_OPERATION.GET_PENDING_CHANNELS:
-      return await authenticatedLndOperations.get_pending_channels();
+      return await authenticatedLndOperations.get_pending_channels(params);
 
     case LND_GRPC_OPERATION.CREATE_INVOICE:
       return await authenticatedLndOperations.create_invoice(params);
 
     case LND_GRPC_OPERATION.GET_INVOICES:
-      return await authenticatedLndOperations.get_invoices();
+      return await authenticatedLndOperations.get_invoices(params);
 
     case LND_GRPC_OPERATION.GET_IDENTITY:
-      return await authenticatedLndOperations.get_identity();
+      return await authenticatedLndOperations.get_identity(params);
 
     case LND_GRPC_OPERATION.CANCEL_HODL_INVOICE:
       return await authenticatedLndOperations.cancel_hodl_invoices(params);
@@ -86,13 +86,13 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.pay_via_payment_details(params);
 
     case LND_GRPC_OPERATION.GET_PAYMENTS:
-      return await authenticatedLndOperations.get_payments();
+      return await authenticatedLndOperations.get_payments(params);
 
     case LND_GRPC_OPERATION.CLOSE_A_CHANNEL:
       return authenticatedLndOperations.close_a_channel(params);
 
     case LND_GRPC_OPERATION.GET_CLOSED_CHANNELS:
-      return await authenticatedLndOperations.get_closed_channels();
+      return await authenticatedLndOperations.get_closed_channels(params);
 
     case LND_GRPC_OPERATION.GET_INVOICE:
       return await authenticatedLndOperations.get_invoice(params);
@@ -102,25 +102,25 @@ const PerformAuthenticatedOperation = async (params) => {
 
      ////// 
     case LND_GRPC_OPERATION.GET_NETWORK_GRAPH:
-      return await authenticatedLndOperations.get_network_graph();
+      return await authenticatedLndOperations.get_network_graph(params);
     
     case LND_GRPC_OPERATION.GET_NETWORK_CENTRALITY:
-      return await authenticatedLndOperations.get_network_centrality();
+      return await authenticatedLndOperations.get_network_centrality(params);
 
     case LND_GRPC_OPERATION.GET_FEE_RATES:
-      return await authenticatedLndOperations.get_fee_rates();
+      return await authenticatedLndOperations.get_fee_rates(params);
 
     case LND_GRPC_OPERATION.GET_FORWARDING_REPUTATIONS:
-      return await authenticatedLndOperations.get_forwading_reputation();
+      return await authenticatedLndOperations.get_forwading_reputation(params);
  
     case LND_GRPC_OPERATION.GET_FORWARDING_CONFIDENCE:
       return await authenticatedLndOperations.get_forwading_confidence(params);
  
     case LND_GRPC_OPERATION.GET_FORWARDS:
-      return await authenticatedLndOperations.get_forwards();
+      return await authenticatedLndOperations.get_forwards(params);
 
     case LND_GRPC_OPERATION.GET_PATH_FINDING_SETTINGS:
-      return await authenticatedLndOperations.get_path_finding_settings();
+      return await authenticatedLndOperations.get_path_finding_settings(params);
 
     case LND_GRPC_OPERATION.GET_PAYMENT:
       return await authenticatedLndOperations.get_payment(params);
@@ -147,10 +147,10 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.remove_peer(params);
 
     case LND_GRPC_OPERATION.GET_PENDING_CHAIN_BALANCE:
-      return await authenticatedLndOperations.get_pending_chain_balance();
+      return await authenticatedLndOperations.get_pending_chain_balance(params);
     
     case LND_GRPC_OPERATION.GET_PENDING_PAYMENTS:
-      return await authenticatedLndOperations.get_pending_payments();
+      return await authenticatedLndOperations.get_pending_payments(params);
     
     case LND_GRPC_OPERATION.SIGN_MESSAGE:
       return await authenticatedLndOperations.sign_message(params);
@@ -162,10 +162,10 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.disconnect_watchtower(params);
     
       case LND_GRPC_OPERATION.GET_CONNECTED_WATCH_TOWERS:
-        return await authenticatedLndOperations.get_connected_watchtowers();
+        return await authenticatedLndOperations.get_connected_watchtowers(params);
       
     case LND_GRPC_OPERATION.GET_TOWER_SERVER_INFO:
-      return await authenticatedLndOperations.get_tower_server_info();
+      return await authenticatedLndOperations.get_tower_server_info(params);
 
     case LND_GRPC_OPERATION.VERIFY_MESSAGE:
       return await authenticatedLndOperations.verify_message(params);
