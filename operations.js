@@ -47,6 +47,13 @@ const LND_GRPC_OPERATION = {
     REMOVE_PEER : "remove_peer", //44
     GET_PENDING_CHAIN_BALANCE : "get_pending_chain_balance", //45
     GET_PENDING_PAYMENTS : "get_pending_payments", //46
+    SIGN_MESSAGE: "sign_message", //47
+    CONNECT_WATCH_TOWER : "connect_watch_tower", //48
+    DISCONNECT_WATCH_TOWER : "disconnect_watch_tower", //49
+    GET_CONNECTED_WATCH_TOWERS : "get_connected_watch_towers", //50
+    GET_TOWER_SERVER_INFO : "get_tower_server_info", //51
+    VERIFY_MESSAGE: "verify_message", //52
+
 
   };
 

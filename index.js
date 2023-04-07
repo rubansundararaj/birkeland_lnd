@@ -151,7 +151,25 @@ const PerformAuthenticatedOperation = async (params) => {
     
     case LND_GRPC_OPERATION.GET_PENDING_PAYMENTS:
       return await authenticatedLndOperations.get_pending_payments();
-  
+    
+    case LND_GRPC_OPERATION.SIGN_MESSAGE:
+      return await authenticatedLndOperations.sign_message(params);
+    
+    case LND_GRPC_OPERATION.CONNECT_WATCH_TOWER:
+      return await authenticatedLndOperations.connect_watch_tower(params);
+
+    case LND_GRPC_OPERATION.DISCONNECT_WATCH_TOWER:
+      return await authenticatedLndOperations.disconnect_watchtower(params);
+    
+      case LND_GRPC_OPERATION.GET_CONNECTED_WATCH_TOWERS:
+        return await authenticatedLndOperations.get_connected_watchtowers();
+      
+    case LND_GRPC_OPERATION.GET_TOWER_SERVER_INFO:
+      return await authenticatedLndOperations.get_tower_server_info();
+
+    case LND_GRPC_OPERATION.VERIFY_MESSAGE:
+      return await authenticatedLndOperations.verify_message(params);
+
     default:
       return { success: false, message: "Invalid operation" };
   }

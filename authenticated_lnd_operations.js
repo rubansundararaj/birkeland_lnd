@@ -45,6 +45,12 @@ const {
   removePeer,
   getPendingChainBalance,
   getPendingPayments,
+  signMessage,
+  disconnectWatchtower,
+  getConnectedWatchtowers,
+  connectWatchtower,
+  getTowerServerInfo,
+  verifyMessage,
 } = require("lightning");
 const fs = require("fs");
 
@@ -652,8 +658,81 @@ class AuthenticatedLndOperations {
     catch(err){
       return { success: false, message: err };
     }
-
   }
+  
+  sign_message = async(body) =>{
+    try{
+      let {message} = body;
+      console.log("sign_message");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await signMessage({lnd: lnd, message: message});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+
+  disconnect_watchtower = async(body) =>{
+    try{
+      let {public_key} = body;
+      console.log("disconnect_watchtower");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await disconnectWatchtower({lnd: lnd, public_key: public_key});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+
+  get_connected_watchtowers = async() =>{
+    try{
+      console.log("get_connected_watchtowers");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getConnectedWatchtowers({lnd: lnd});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+  connect_watch_tower = async(body) =>{
+    try{
+      let {public_key,socket} = body;
+      console.log("connect_watch_tower");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await connectWatchtower({lnd: lnd, public_key: public_key, socket: socket});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+  get_tower_server_info = async() =>{
+    try{
+      console.log("get_tower_server_info");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getTowerServerInfo({lnd: lnd});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+  verify_message = async(body)=>{
+    try{
+      let {message,signature} = body;
+      console.log("verify_message");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await verifyMessage({lnd: lnd, message: message, signature: signature});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+
 }
 
 module.exports = { AuthenticatedLndOperations };
