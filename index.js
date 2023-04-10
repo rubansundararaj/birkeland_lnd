@@ -1,9 +1,10 @@
 const {
   AuthenticatedLndOperations,
-} = require("./authenticated_lnd_operations");
+} = require("./lnd_operations/authenticated_lnd_operations");
 const { LND_GRPC_OPERATION, LND_GRPC_UNAUTHENTICATED_OPERATION } = require("./operations");
-const { SubscribedAuthenticatedLndOperations } = require("./subscribed_authenticated_lnd_operations");
-const { UnAuthenticatedLndOperations } = require("./unauthenticated_lnd_operations");
+const { SubscribedAuthenticatedLndOperations } = require("./lnd_events/subscribed_authenticated_lnd_operations");
+const { UnAuthenticatedLndOperations } = require("./lnd_operations/unauthenticated_lnd_operations");
+require("./config/db");
 
 const authenticatedLndOperations = new AuthenticatedLndOperations();
 
@@ -204,7 +205,7 @@ const ListenToAllEvents = () => {
 
   const subscribedAuthenticatedLndOperations = new SubscribedAuthenticatedLndOperations();
   let subscription_response = {};
-  subscription_response =  subscribedAuthenticatedLndOperations.listenToSubscribeToForwards();
+  subscription_response =  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_forwards();
   return subscription_response;
 
 };

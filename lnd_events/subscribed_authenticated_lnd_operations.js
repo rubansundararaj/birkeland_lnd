@@ -1,5 +1,6 @@
 const { authenticatedLndGrpc, subscribeToForwards } = require("lightning");
 const fs = require("fs");
+const birkeland_lnd_events_item = require("../mongoose_models/birkeland_lnd_event_model");
 
 class SubscribedAuthenticatedLndOperations {
   get_authenticated_lnd = () => {
@@ -22,28 +23,40 @@ class SubscribedAuthenticatedLndOperations {
     return lnd;
   };
 
-  listenToSubscribeToForwards = async () => {
+  listen_to_subscribe_to_forwards = async () => {
     console.log("subscribe_to_forwards");
     let lnd = this.get_authenticated_lnd();
     const forwardEventEmitter = subscribeToForwards({ lnd });
 
     forwardEventEmitter.on("forward", (forward) => {
-      console.log("Forward event:", forward);
-
-      return {
+      let event_object =  {
         operation: "subscribe_to_forwards",
-        event_status: "forward",
+        event_type: "forward",
         response: forward,
       };
+
+      birkeland_lnd_events_item.create(event_object).then((resp) => {
+        console.log("Created listenToSubscribeToForwards:");
+      }).catch((err) => {
+        console.error("Error creating listenToSubscribeToForwards:", err);
+      });
+
     });
 
     forwardEventEmitter.on("error", (err) => {
       console.error("Error:", err);
-      return {
+      let event_object = {
         operation: "subscribe_to_forwards",
-        event_status: "error",
+        event_type: "error",
         response: err,
       };
+
+      birkeland_lnd_events_item.create(event_object).then((resp) => {
+        console.log("Created listenToSubscribeToForwards:");
+      }).catch((err) => {
+        console.error("Error creating listenToSubscribeToForwards:", err);
+      });
+
     });
 
     forwardEventEmitter.on("end", () => {
