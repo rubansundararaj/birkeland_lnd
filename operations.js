@@ -64,4 +64,70 @@ const LND_GRPC_OPERATION = {
     CREATE_SEED : "create_seed"
 }
 
-  module.exports = {LND_GRPC_OPERATION,LND_GRPC_UNAUTHENTICATED_OPERATION}
+const LND_SUBSCRIPTION_OPERATIONS = {
+    SUBSCRIBE_TO_BACKUPS : "subscribe_to_backups",
+    SUBSCRIBE_TO_BLCOKS : "subscribe_to_blocks",
+
+    SUBSCRIBE_TO_CHAIN_ADDRESSES : "subscribe_to_chain_addresses",
+    SUBSCRIBE_TO_CHAIN_SPEND : "subscribe_to_chain_spend",
+    SUBSCRIBE_TO_CHANNELS : "subscribe_to_channels",
+
+    SUBSCRIBE_TO_FORWARD_REQUESTS : "subscribe_to_forward_requests",
+    SUBSCRIBE_TO_FORWARDS : "subscribe_to_forwards",
+
+    SUBSCRIBE_TO_GRAPH : "subscribe_to_graph",
+    
+    SUBSCRIBE_TO_INVOICE : "subscribe_to_invoice",
+    SUBSCRIBE_TO_INVOICES : "subscribe_to_invoices",
+    
+    SUBSCRIBE_TO_OPEN_REQUESTS : "subscribe_to_open_requests",
+    
+    SUBSCRIBE_TO_PAST_PAYMENT : "subscribe_to_past_payment",
+    SUBSCRIBE_TO_PAST_PAYMENTS : "subscribe_to_past_payments",
+    SUBSCRIBE_TO_PAY_VIA_DETAILS : "subscribe_to_past_details",
+    SUBSCRIBE_TO_PAY_VIA_REQUEST : "subscribe_to_pay_via_request",
+    SUBSCRIBE_TO_PAY_VIA_ROUTES : "subscribe_to_pay_via_routes",
+    SUBSCRIBE_TO_PAYMENTS : "subscribe_to_payments",
+
+    SUBSCRIBE_TO_PEER_MESSAGES : "subscribe_to_peer_messages",
+    SUBSCRIBE_TO_PEERS : "subscribe_to_peers",
+
+    SUBSCRIBE_TO_PROBE : "subscribe_to_probe",
+    SUBSCRIBE_TO_PROBE_FOR_ROUTES : "subscribe_to_probe_for_routes",
+
+    SUBSCRIBE_TO_RPC_REQUESTS : "subscribe_to_rpc_requests",
+    SUBSCRIBE_TO_TRANSACTIONS : "subscribe_to_transactions",
+    SUBSCRIBE_TO_WALLET_STATUS : "subscribe_to_wallet_status"
+}
+
+const LND_SUBSCRIPTION_EVENT_TYPES = {
+  FORWARD : "forward",
+  ERROR : "error",
+  BACKUP : "backup",
+  BLOCK : "block",
+  CONFIRMATION : "confirmation",
+  CHANNEL_ACTIVE_CHANGED : "channel_active_changed",
+  CHANNEL_CLOSED : "channel_closed",
+  CHANNEL_OPENED : "channel_opened",
+  CHANNEL_OPENING : "channel_opening",
+  FORWARD_REQUEST : "forward_request",
+  CHANNEL_UPDATED : "channel_updated",
+  NODE_UPDATED : "node_updated",
+  INVOICE_UPDATED : "invoice_updated",
+  CHANNEL_REQUEST : "channel_request",
+  PAYMENT : "payment",
+  CONFIRMED : "confirmed",
+  FAILED : "failed",
+  PAYING : "paying",
+  MESSAGE_RECEIVED : "message_received",
+  CONNECTED : "connected",
+  CHAIN_TRANSACTION : "chain_transaction",
+  ABSENT : "absent",
+  ACTIVE : "active",
+  LOCKED : "locked",
+  READY : "ready",
+  STARTING : "starting",
+
+}
+
+  module.exports = {LND_GRPC_OPERATION,LND_GRPC_UNAUTHENTICATED_OPERATION,LND_SUBSCRIPTION_OPERATIONS,LND_SUBSCRIPTION_EVENT_TYPES}

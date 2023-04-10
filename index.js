@@ -204,9 +204,22 @@ const PerformUnAuthenticatedOperation = async (params) => {
 const ListenToAllEvents = () => {
 
   const subscribedAuthenticatedLndOperations = new SubscribedAuthenticatedLndOperations();
-  let subscription_response = {};
-  subscription_response =  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_forwards();
-  return subscription_response;
+
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_backups();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_blocks();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_channels();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_forward_requests();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_forwards();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_graph();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_invoices();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_open_requests();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_past_payments();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_payments();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_peer_messages();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_peers();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_transactions();
+  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_wallet_status();
+
 
 };
 

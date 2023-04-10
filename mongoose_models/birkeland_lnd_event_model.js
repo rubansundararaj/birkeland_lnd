@@ -20,6 +20,7 @@ const birkeland_lnd_events_schema = new mongoose.Schema({
     type: Date,
     required: true,
     unique: false,
+    default: Date.now
   }
 });
 

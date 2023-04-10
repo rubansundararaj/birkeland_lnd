@@ -1,6 +1,6 @@
 {
   "name": "test_birkeland_lnd",
-  "version": "0.1.3",
+  "version": "0.1.6",
   "description": "add subscribed event",
   "main": "index.js",
   "scripts": {
