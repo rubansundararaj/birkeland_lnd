@@ -2,6 +2,7 @@ const {
   AuthenticatedLndOperations,
 } = require("./authenticated_lnd_operations");
 const { LND_GRPC_OPERATION, LND_GRPC_UNAUTHENTICATED_OPERATION } = require("./operations");
+const { SubscribedAuthenticatedLndOperations } = require("./subscribed_authenticated_lnd_operations");
 const { UnAuthenticatedLndOperations } = require("./unauthenticated_lnd_operations");
 
 const authenticatedLndOperations = new AuthenticatedLndOperations();
@@ -199,5 +200,14 @@ const PerformUnAuthenticatedOperation = async (params) => {
   }
 }
 
+const ListenToAllEvents = () => {
 
-module.exports={PerformAuthenticatedOperation,PerformUnAuthenticatedOperation}
+  const subscribedAuthenticatedLndOperations = new SubscribedAuthenticatedLndOperations();
+  let subscription_response = {};
+  subscription_response =  subscribedAuthenticatedLndOperations.listenToSubscribeToForwards();
+  return subscription_response;
+
+};
+
+
+module.exports={PerformAuthenticatedOperation,PerformUnAuthenticatedOperation,ListenToAllEvents}
