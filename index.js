@@ -172,6 +172,9 @@ const PerformAuthenticatedOperation = async (params) => {
     case LND_GRPC_OPERATION.VERIFY_MESSAGE:
       return await authenticatedLndOperations.verify_message(params);
 
+      case LND_GRPC_OPERATION.GET_FAILED_PAYMENTS:
+        return await authenticatedLndOperations.get_failed_payments();
+
     default:
       return { success: false, message: "Invalid operation" };
   }
@@ -223,5 +226,11 @@ const ListenToAllEvents = () => {
 
 };
 
+const AllEventListeners = () => {
 
-module.exports={PerformAuthenticatedOperation,PerformUnAuthenticatedOperation,ListenToAllEvents}
+  return new SubscribedAuthenticatedLndOperations();
+
+}
+
+
+module.exports={PerformAuthenticatedOperation,PerformUnAuthenticatedOperation,ListenToAllEvents,AllEventListeners}

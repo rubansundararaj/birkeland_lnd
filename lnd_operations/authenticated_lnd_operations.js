@@ -51,6 +51,7 @@ const {
   connectWatchtower,
   getTowerServerInfo,
   verifyMessage,
+  getFailedPayments,
 } = require("lightning");
 const fs = require("fs");
 
@@ -726,6 +727,18 @@ class AuthenticatedLndOperations {
       console.log("verify_message");
       let lnd = this.get_authenticated_lnd();
       let resp = await verifyMessage({lnd: lnd, message: message, signature: signature});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+
+  get_failed_payments = async() =>{
+    try{
+      console.log("get_failed_payments");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getFailedPayments({lnd: lnd});
       return { success: true, message: resp };
     }
     catch(err){

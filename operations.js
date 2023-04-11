@@ -53,6 +53,7 @@ const LND_GRPC_OPERATION = {
     GET_CONNECTED_WATCH_TOWERS : "get_connected_watch_towers", //50
     GET_TOWER_SERVER_INFO : "get_tower_server_info", //51
     VERIFY_MESSAGE: "verify_message", //52
+    GET_FAILED_PAYMENTS : "get_failed_payments", //53
 
 
   };
