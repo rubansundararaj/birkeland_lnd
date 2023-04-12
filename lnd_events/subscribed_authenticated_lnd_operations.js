@@ -74,7 +74,7 @@ class SubscribedAuthenticatedLndOperations {
     birkeland_lnd_events_item
       .create(event_object)
       .then((resp) => {
-        console.log("Created a record:", resp);
+        console.log("Created a record:");
       })
       .catch((err) => {
         console.error("Error creating record:", err);
