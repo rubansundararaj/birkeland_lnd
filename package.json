@@ -1,6 +1,6 @@
 {
   "name": "test_birkeland_lnd",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "add subscribed event",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "author": "Ruban Sundara Raj <rubansundararaj@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "lightning": "^7.1.4",
+    "lightning": "^8.0.0",
     "mongoose": "^7.0.3"
   }
 }
