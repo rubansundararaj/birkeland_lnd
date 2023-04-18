@@ -172,8 +172,14 @@ const PerformAuthenticatedOperation = async (params) => {
     case LND_GRPC_OPERATION.VERIFY_MESSAGE:
       return await authenticatedLndOperations.verify_message(params);
 
-      case LND_GRPC_OPERATION.GET_FAILED_PAYMENTS:
-        return await authenticatedLndOperations.get_failed_payments();
+    case LND_GRPC_OPERATION.GET_FAILED_PAYMENTS:
+      return await authenticatedLndOperations.get_failed_payments();
+
+    case LND_GRPC_OPERATION.GET_CHAIN_TRANSACTIONS:
+      return await authenticatedLndOperations.get_chain_transactions();
+
+    case LND_GRPC_OPERATION.GET_CHAIN_FEE_RATE:
+      return await authenticatedLndOperations.get_chain_fee_rate();
 
     default:
       return { success: false, message: "Invalid operation" };
@@ -208,20 +214,20 @@ const ListenToAllEvents = () => {
 
   const subscribedAuthenticatedLndOperations = new SubscribedAuthenticatedLndOperations();
 
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_backups();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_blocks();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_channels();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_forward_requests();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_forwards();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_graph();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_invoices();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_open_requests();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_past_payments();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_payments();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_peer_messages();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_peers();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_transactions();
-  subscribedAuthenticatedLndOperations.listen_to_subscribe_to_wallet_status();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_backups();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_blocks();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_channels();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_forward_requests();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_forwards();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_graph();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_invoices();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_open_requests();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_past_payments();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_payments();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_peer_messages();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_peers();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_transactions();
+  // subscribedAuthenticatedLndOperations.listen_to_subscribe_to_wallet_status();
 
 
 };

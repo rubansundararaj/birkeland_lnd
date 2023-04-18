@@ -52,6 +52,8 @@ const {
   getTowerServerInfo,
   verifyMessage,
   getFailedPayments,
+  getChainTransactions,
+  getChainFeeRate,
 } = require("lightning");
 const fs = require("fs");
 
@@ -739,6 +741,30 @@ class AuthenticatedLndOperations {
       console.log("get_failed_payments");
       let lnd = this.get_authenticated_lnd();
       let resp = await getFailedPayments({lnd: lnd});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+
+  get_chain_transactions = async() =>{
+    try{
+      console.log("get_chain_transactions");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getChainTransactions({lnd: lnd});
+      return { success: true, message: resp };
+    }
+    catch(err){
+      return { success: false, message: err };
+    }
+  }
+
+  get_chain_fee_rate = async() =>{
+    try{
+      console.log("get_chain_fee_rate");
+      let lnd = this.get_authenticated_lnd();
+      let resp = await getChainFeeRate({lnd: lnd});
       return { success: true, message: resp };
     }
     catch(err){

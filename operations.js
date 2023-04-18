@@ -55,7 +55,8 @@ const LND_GRPC_OPERATION = {
     VERIFY_MESSAGE: "verify_message", //52
     GET_FAILED_PAYMENTS : "get_failed_payments", //53
 
-
+    GET_CHAIN_TRANSACTIONS: "get_chain_transactions", //54
+    GET_CHAIN_FEE_RATE : "get_chain_fee_rate", //56
   };
 
   const LND_GRPC_UNAUTHENTICATED_OPERATION = {
