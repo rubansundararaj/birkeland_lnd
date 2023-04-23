@@ -36,6 +36,8 @@ const LND_GRPC_OPERATION = {
     GET_FORWARDING_REPUTATIONS:"get_forwarding_reputations",//33
     GET_FORWARDING_CONFIDENCE:"get_forwarding_confidence",//34
     GET_FORWARDS : "get_forwards",//35
+    GET_FORWARDS_GRPC : "get_forwards_grpc",//36
+    
     GET_PATH_FINDING_SETTINGS :"get_path_finding_settings",//36
     GET_PAYMENT : "get_payment",//37
     GET_ROUTE_TO_DESTINATION : "get_route_to_destination",//38

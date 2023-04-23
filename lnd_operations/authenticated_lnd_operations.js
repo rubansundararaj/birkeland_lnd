@@ -163,11 +163,12 @@ class AuthenticatedLndOperations {
     }
   };
 
-  get_forwards = async () => {
+  get_forwards = async (params) => {
     try {
+      let {limit} = params;
       console.log("get_forwards");
       let lnd = this.get_authenticated_lnd();
-      let resp = await getForwards({ lnd: lnd });
+      let resp = await getForwards({ lnd: lnd,limit:limit });
       return { success: true, message: resp };
     } catch (err) {
       return { success: false, message: err };

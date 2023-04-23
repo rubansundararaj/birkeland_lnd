@@ -4,9 +4,12 @@ const {
 const { LND_GRPC_OPERATION, LND_GRPC_UNAUTHENTICATED_OPERATION } = require("./operations");
 const { SubscribedAuthenticatedLndOperations } = require("./lnd_events/subscribed_authenticated_lnd_operations");
 const { UnAuthenticatedLndOperations } = require("./lnd_operations/unauthenticated_lnd_operations");
+const { AuthenticatedGrpcCalls } = require("./lnd_grpc/authenticated_grpc_calls");
 require("./config/db");
 
+
 const authenticatedLndOperations = new AuthenticatedLndOperations();
+const authenticatedGrpcCalls = new AuthenticatedGrpcCalls();
 
 const PerformAuthenticatedOperation = async (params) => {
   let { operation } = params;
@@ -119,7 +122,10 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.get_forwading_confidence(params);
  
     case LND_GRPC_OPERATION.GET_FORWARDS:
-      return await authenticatedLndOperations.get_forwards();
+      return await authenticatedLndOperations.get_forwards(params);
+
+    case LND_GRPC_OPERATION.GET_FORWARDS_GRPC:
+      return  await authenticatedGrpcCalls.grpc_forwarding_history(params)
 
     case LND_GRPC_OPERATION.GET_PATH_FINDING_SETTINGS:
       return await authenticatedLndOperations.get_path_finding_settings();
