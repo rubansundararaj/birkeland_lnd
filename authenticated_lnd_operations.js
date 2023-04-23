@@ -56,21 +56,15 @@ const fs = require("fs");
 
 class AuthenticatedLndOperations {
   get_authenticated_lnd = (macaroon) => {
-    const tls_cert = fs.readFileSync("/etc/birkeland/tlscert", {
-      encoding: "utf8",
-      flag: "r",
-    });
 
-    // const macroon = fs.readFileSync("/etc/birkeland/btc_admin_macroon", {
-    //   encoding: "utf8",
-    //   flag: "r",
-    // });
 
-    const { lnd } = authenticatedLndGrpc({
-      cert: tls_cert,
-      macaroon: macaroon,
-      socket: "127.0.0.1:10009",
-    });
+    // {
+    //   cert: tls_cert,
+    //   macaroon: macaroon,
+    //   socket: "127.0.0.1:10009",
+    // }
+
+    const { lnd } = authenticatedLndGrpc(macaroon);
 
     return lnd;
   };
