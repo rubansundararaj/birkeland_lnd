@@ -53,7 +53,9 @@ const LND_GRPC_OPERATION = {
     GET_CONNECTED_WATCH_TOWERS : "get_connected_watch_towers", //50
     GET_TOWER_SERVER_INFO : "get_tower_server_info", //51
     VERIFY_MESSAGE: "verify_message", //52
-
+    GET_FORWARDS_GRPC : "get_forwards_grpc", //53
+    GET_CHANNELS_GRPC : "get_channels_grpc", //54
+    GET_CHANNEL_GRPC : "get_channel_grpc", //55
 
   };
 

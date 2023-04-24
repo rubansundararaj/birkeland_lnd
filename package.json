@@ -1,6 +1,6 @@
 {
   "name": "birkeland_lnd_custom_macaroon",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "birkeland module to talk to lnd ",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,8 @@
   "author": "Ruban Sundara Raj <rubansundararaj@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@grpc/grpc-js": "^1.8.14",
+    "@grpc/proto-loader": "^0.7.6",
     "lightning": "^7.1.4"
   }
 }

@@ -1,11 +1,13 @@
 const {
   AuthenticatedLndOperations,
 } = require("./authenticated_lnd_operations");
+const { AuthenticatedGrpcCalls } = require("./lnd_grpc/authenticated_grpc_calls");
+const { InitializeAuthenticatedGrpcCommCredentials } = require("./lnd_grpc/initialize_authenticated_grpc_comm_credentials");
 const { LND_GRPC_OPERATION, LND_GRPC_UNAUTHENTICATED_OPERATION } = require("./operations");
 const { UnAuthenticatedLndOperations } = require("./unauthenticated_lnd_operations");
 
 const authenticatedLndOperations = new AuthenticatedLndOperations();
-
+const authenticatedGrpcCalls = new AuthenticatedGrpcCalls();
 const PerformAuthenticatedOperation = async (params) => {
   let { operation } = params;
 
@@ -169,6 +171,15 @@ const PerformAuthenticatedOperation = async (params) => {
 
     case LND_GRPC_OPERATION.VERIFY_MESSAGE:
       return await authenticatedLndOperations.verify_message(params);
+    
+    case LND_GRPC_OPERATION.GET_FORWARDS_GRPC:
+      return await authenticatedGrpcCalls.grpc_forwarding_history(params);
+
+    case LND_GRPC_OPERATION.GET_CHANNELS_GRPC:
+      return await authenticatedGrpcCalls.grpc_get_channels(params);
+
+    case LND_GRPC_OPERATION.GET_CHANNEL_GRPC:
+      return await authenticatedGrpcCalls.grpc_get_chan_info(params);
 
     default:
       return { success: false, message: "Invalid operation" };
