@@ -1,6 +1,6 @@
 {
   "name": "birkeland_lnd_custom_macaroon",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "birkeland module to talk to lnd ",
   "main": "index.js",
   "scripts": {

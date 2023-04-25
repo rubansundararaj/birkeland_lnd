@@ -71,7 +71,6 @@ class AuthenticatedLndOperations {
 
   get_closed_channels = async (body) => {
     try {
-      console.log("get_closed_channels");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       const resp = await getClosedChannels({ lnd });
@@ -83,7 +82,6 @@ class AuthenticatedLndOperations {
 
   close_a_channel = async (body) => {
     try {
-      console.log("close_a_channel");
       let { channel_id,macaroon } = body;
       let id = channel_id;
       let lnd = this.get_authenticated_lnd(macaroon);
@@ -96,7 +94,6 @@ class AuthenticatedLndOperations {
 
   get_network_graph = async (body) => {
     try {
-      console.log("get_network_graph");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getNetworkGraph({ lnd: lnd });
@@ -108,7 +105,6 @@ class AuthenticatedLndOperations {
 
   get_network_centrality = async (body) => {
     try {
-      console.log("get_network_centrality");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getNetworkCentrality({ lnd: lnd });
@@ -120,7 +116,6 @@ class AuthenticatedLndOperations {
 
   get_fee_rates = async (body) => {
     try {
-      console.log("get_fee_rates");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getFeeRates({ lnd: lnd });
@@ -132,7 +127,6 @@ class AuthenticatedLndOperations {
 
   get_forwading_reputation = async (body) => {
     try {
-      console.log("get_forwading_reputation");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getForwardingReputations({ lnd: lnd });
@@ -145,7 +139,6 @@ class AuthenticatedLndOperations {
   get_forwading_confidence = async (body) => {
     try {
       let { from, to, mtokens,macaroon } = body;
-      console.log("get_forwading_confidence");
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getForwardingConfidence({
         lnd: lnd,
@@ -161,7 +154,6 @@ class AuthenticatedLndOperations {
 
   get_forwards = async (body) => {
     try {
-      console.log("get_forwards");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getForwards({ lnd: lnd });
@@ -173,7 +165,6 @@ class AuthenticatedLndOperations {
 
   get_path_finding_settings = async (body) => {
     try {
-      console.log("get_path_finding_settings");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getPathfindingSettings({ lnd: lnd });
@@ -185,7 +176,6 @@ class AuthenticatedLndOperations {
 
   send_to_chain_address = async (body) => {
     try {
-      console.log("send_to_chain_address");
       let { address, tokens,macaroon } = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let params_object = {
@@ -203,7 +193,6 @@ class AuthenticatedLndOperations {
 
   pay_via_payment_details = async (body) => {
     try {
-      console.log("pay_via_payment_details");
       let { request_id, destination, token,macaroon } = body;
       let request_id_object = { id: request_id };
       let lnd = this.get_authenticated_lnd(macaroon);
@@ -221,7 +210,6 @@ class AuthenticatedLndOperations {
 
   cancel_hodl_invoices = async (body) => {
     try {
-      console.log("cancel_hodl_invoices");
       let { request_id,macaroon } = body;
       let request_id_object = { id: request_id };
       let lnd = this.get_authenticated_lnd(macaroon);
@@ -311,7 +299,6 @@ class AuthenticatedLndOperations {
 
   make_payment = async (body) => {
     try {
-      console.log("make_payment");
       let { request,macaroon } = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await pay({ lnd: lnd, request: request });
@@ -323,7 +310,6 @@ class AuthenticatedLndOperations {
 
   add_peer = async (body) => {
     try {
-      console.log("add_peer");
       let { socket, public_key,macaroon } = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await addPeer({
@@ -340,7 +326,6 @@ class AuthenticatedLndOperations {
   get_u_txos = async (params) => {
     try {
       let { min_confirmations,macaroon } = params;
-      console.log("get_u_txos");
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getUtxos({
         lnd: lnd,
@@ -354,7 +339,6 @@ class AuthenticatedLndOperations {
 
   create_chain_address = async (body) => {
     try {
-      console.log("create_chain_address");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await createChainAddress({ lnd: lnd, format: "p2wpkh" });
@@ -367,7 +351,6 @@ class AuthenticatedLndOperations {
   open_channel = async (body) => {
     try {
       let { local_tokens, partner_public_key,macaroon } = body;
-      console.log("open_channel");
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await openChannel({
         local_tokens: local_tokens,
@@ -382,7 +365,6 @@ class AuthenticatedLndOperations {
 
   get_chain_balance = async (body) => {
     try {
-      console.log("get_chain_balance");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getChainBalance({ lnd: lnd });
@@ -394,7 +376,6 @@ class AuthenticatedLndOperations {
 
   get_channel = async (body) => {
     try {
-      console.log("get_channel");
       let { channel_id,macaroon } = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getChannel({ id: channel_id, lnd: lnd });
@@ -406,7 +387,6 @@ class AuthenticatedLndOperations {
 
   get_channel_balance = async (body) => {
     try {
-      console.log("get_channel_balance");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getChannelBalance({ lnd: lnd });
@@ -418,7 +398,6 @@ class AuthenticatedLndOperations {
 
   get_channels = async (body) => {
     try {
-      console.log("get_channels");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getChannels({ lnd: lnd });
@@ -430,7 +409,6 @@ class AuthenticatedLndOperations {
 
   get_methods = async (body) => {
     try {
-      console.log("get_methods");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getMethods({ lnd: lnd });
@@ -443,7 +421,6 @@ class AuthenticatedLndOperations {
   get_node = async (body) => {
     try {
       let { public_key,macaroon } = body;
-      console.log("get_node");
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getNode({ lnd: lnd, public_key: public_key });
       return { success: true, message: resp };
@@ -454,7 +431,6 @@ class AuthenticatedLndOperations {
 
   get_network_info = async (body) => {
     try {
-      console.log("get_network_info");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getNetworkInfo({ lnd: lnd });
@@ -488,7 +464,6 @@ class AuthenticatedLndOperations {
 
   get_wallet_info = async (body) => {
     try {
-      console.log("get_wallet_info");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getWalletInfo({ lnd: lnd });
@@ -500,7 +475,6 @@ class AuthenticatedLndOperations {
 
   get_pending_channels = async (body) => {
     try {
-      console.log("get_pending_channels");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getPendingChannels({ lnd: lnd });
@@ -512,7 +486,6 @@ class AuthenticatedLndOperations {
 
   get_public_key = async (body) => {
     try {
-      console.log("get_public_key");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getPublicKey({ family: 1, index: 1, lnd: lnd });
@@ -525,7 +498,6 @@ class AuthenticatedLndOperations {
   create_invoice = async (body) => {
     try {
       let { mtokens, description, description_hash,macaroon } = body;
-      console.log("create_invoice");
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await createInvoice({
         lnd: lnd,
@@ -541,7 +513,6 @@ class AuthenticatedLndOperations {
 
   get_invoices = async (body) => {
     try {
-      console.log("get_invoices");
       let {macaroon} = body;
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getInvoices({ lnd: lnd });
@@ -555,7 +526,6 @@ class AuthenticatedLndOperations {
     try {
       let { invoice_id,macaroon } = body;
       let id = invoice_id;
-      console.log("get_invoice");
       let lnd = this.get_authenticated_lnd(macaroon);
       let resp = await getInvoice({ id, lnd: lnd });
       return { success: true, message: resp };
@@ -567,7 +537,6 @@ class AuthenticatedLndOperations {
   is_destination_payable = async (body) => {
     try {
       let { request,macaroon } = body;
-      console.log("is_destination_payable");
       let lnd = this.get_authenticated_lnd(macaroon);
       const { destination, tokens } = await decodePaymentRequest({
         lnd,

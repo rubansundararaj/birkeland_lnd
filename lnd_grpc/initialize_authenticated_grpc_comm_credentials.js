@@ -25,7 +25,6 @@ class InitializeAuthenticatedGrpcCommCredentials {
         const macaroonCreds = grpc.credentials.createFromMetadataGenerator(function(args, callback) {
         let metadata = new grpc.Metadata();
         metadata.add('macaroon', macaroon);
-        console.log(metadata)
         callback(null, metadata);
         });
         let creds = grpc.credentials.combineChannelCredentials(sslCreds, macaroonCreds);

@@ -1,2 +1,4 @@
 /node_modules
 /package-lock.json
+lnd_grpc/test_list_channel.js
+lnd_grpc/tes_direct_grpc.js
