@@ -17,7 +17,7 @@ class InitializeAuthenticatedGrpcCommCredentials {
             oneofs: true,
           };
 
-        const packageDefinition = protoLoader.loadSync('../protofiles/lightning.proto', loaderOptions);
+        const packageDefinition = protoLoader.loadSync(`${__dirname}/lightning.proto`, loaderOptions);
         const lnrpc = grpc.loadPackageDefinition(packageDefinition).lnrpc;
         process.env.GRPC_SSL_CIPHER_SUITES = 'HIGH+ECDSA';
         const tlsCert = tls_cert;

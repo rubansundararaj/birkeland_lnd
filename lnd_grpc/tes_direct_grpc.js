@@ -13,7 +13,7 @@ const loaderOptions = {
   defaults: true,
   oneofs: true,
 };
-const packageDefinition = protoLoader.loadSync('./lightning.proto', loaderOptions);
+const packageDefinition = protoLoader.loadSync(`${__dirname}/lightning.proto`, loaderOptions);
 const lnrpc = grpc.loadPackageDefinition(packageDefinition).lnrpc;
 process.env.GRPC_SSL_CIPHER_SUITES = 'HIGH+ECDSA';
 const tlsCert = '';
