@@ -56,6 +56,15 @@ const LND_GRPC_OPERATION = {
     GET_FORWARDS_GRPC : "get_forwards_grpc", //53
     GET_CHANNELS_GRPC : "get_channels_grpc", //54
     GET_CHANNEL_GRPC : "get_channel_grpc", //55
+    WALLET_BALANCE_GPRC : "wallet_balance_grpc", //56
+    GET_INFO_GRPC : "get_info_grpc", //57
+    CHANNEL_INSIGHTS_GRPC : "channel_insights_grpc", //58
+    CLOSE_REPORTS_GRPC : "close_reports_grpc", //59
+    EXCHANGE_RATE_GRPC : "exchange_rate_grpc", //60
+    NODE_AUDIT_GRPC : "node_audit_grpc", //61
+    OUTLIER_RECOMMENDATIONS_GRPC : "outlier_recommissions_grpc", //62
+    REVENUE_REPORT_GRPC : "revenue_reporter_grpc", //63
+    THRESHOLD_RECOMMENDATIONS_GRPC : "threshold_recommendations_grpc", //64
 
   };
 

@@ -1,10 +1,19 @@
 const {
   AuthenticatedLndOperations,
 } = require("./authenticated_lnd_operations");
-const { AuthenticatedGrpcCalls } = require("./lnd_grpc/authenticated_grpc_calls");
-const { InitializeAuthenticatedGrpcCommCredentials } = require("./lnd_grpc/initialize_authenticated_grpc_comm_credentials");
-const { LND_GRPC_OPERATION, LND_GRPC_UNAUTHENTICATED_OPERATION } = require("./operations");
-const { UnAuthenticatedLndOperations } = require("./unauthenticated_lnd_operations");
+const {
+  AuthenticatedGrpcCalls,
+} = require("./lnd_grpc/authenticated_grpc_calls");
+const {
+  InitializeAuthenticatedGrpcCommCredentials,
+} = require("./lnd_grpc/initialize_authenticated_grpc_comm_credentials");
+const {
+  LND_GRPC_OPERATION,
+  LND_GRPC_UNAUTHENTICATED_OPERATION,
+} = require("./operations");
+const {
+  UnAuthenticatedLndOperations,
+} = require("./unauthenticated_lnd_operations");
 
 const authenticatedLndOperations = new AuthenticatedLndOperations();
 const authenticatedGrpcCalls = new AuthenticatedGrpcCalls();
@@ -12,7 +21,6 @@ const PerformAuthenticatedOperation = async (params) => {
   let { operation } = params;
 
   switch (operation) {
-
     case LND_GRPC_OPERATION.GET_U_TXOS:
       let get_u_txos_resp = await authenticatedLndOperations.get_u_txos(params);
       return get_u_txos_resp;
@@ -27,7 +35,8 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedLndOperations.get_channel(params);
 
     case LND_GRPC_OPERATION.GET_CHANNEL_BALANCE:
-      let get_channel_balance_resp = await authenticatedLndOperations.get_channel_balance(params);
+      let get_channel_balance_resp =
+        await authenticatedLndOperations.get_channel_balance(params);
       return get_channel_balance_resp;
 
     case LND_GRPC_OPERATION.GET_CHANNELS:
@@ -102,10 +111,10 @@ const PerformAuthenticatedOperation = async (params) => {
     case LND_GRPC_OPERATION.SEND_TO_CHAIN_ADDRESS:
       return await authenticatedLndOperations.send_to_chain_address(params);
 
-     ////// 
+    //////
     case LND_GRPC_OPERATION.GET_NETWORK_GRAPH:
       return await authenticatedLndOperations.get_network_graph(params);
-    
+
     case LND_GRPC_OPERATION.GET_NETWORK_CENTRALITY:
       return await authenticatedLndOperations.get_network_centrality(params);
 
@@ -114,10 +123,10 @@ const PerformAuthenticatedOperation = async (params) => {
 
     case LND_GRPC_OPERATION.GET_FORWARDING_REPUTATIONS:
       return await authenticatedLndOperations.get_forwading_reputation(params);
- 
+
     case LND_GRPC_OPERATION.GET_FORWARDING_CONFIDENCE:
       return await authenticatedLndOperations.get_forwading_confidence(params);
- 
+
     case LND_GRPC_OPERATION.GET_FORWARDS:
       return await authenticatedLndOperations.get_forwards(params);
 
@@ -126,13 +135,13 @@ const PerformAuthenticatedOperation = async (params) => {
 
     case LND_GRPC_OPERATION.GET_PAYMENT:
       return await authenticatedLndOperations.get_payment(params);
-  
+
     case LND_GRPC_OPERATION.GET_ROUTE_TO_DESTINATION:
       return await authenticatedLndOperations.get_route_to_destination(params);
 
     case LND_GRPC_OPERATION.IS_DESTINATION_PAYABLE:
       return await authenticatedLndOperations.is_destination_payable(params);
-  
+
     case LND_GRPC_OPERATION.PROBE_FOR_ROUTE:
       return await authenticatedLndOperations.probe_for_routes(params);
 
@@ -150,28 +159,28 @@ const PerformAuthenticatedOperation = async (params) => {
 
     case LND_GRPC_OPERATION.GET_PENDING_CHAIN_BALANCE:
       return await authenticatedLndOperations.get_pending_chain_balance(params);
-    
+
     case LND_GRPC_OPERATION.GET_PENDING_PAYMENTS:
       return await authenticatedLndOperations.get_pending_payments(params);
-    
+
     case LND_GRPC_OPERATION.SIGN_MESSAGE:
       return await authenticatedLndOperations.sign_message(params);
-    
+
     case LND_GRPC_OPERATION.CONNECT_WATCH_TOWER:
       return await authenticatedLndOperations.connect_watch_tower(params);
 
     case LND_GRPC_OPERATION.DISCONNECT_WATCH_TOWER:
       return await authenticatedLndOperations.disconnect_watchtower(params);
-    
-      case LND_GRPC_OPERATION.GET_CONNECTED_WATCH_TOWERS:
-        return await authenticatedLndOperations.get_connected_watchtowers(params);
-      
+
+    case LND_GRPC_OPERATION.GET_CONNECTED_WATCH_TOWERS:
+      return await authenticatedLndOperations.get_connected_watchtowers(params);
+
     case LND_GRPC_OPERATION.GET_TOWER_SERVER_INFO:
       return await authenticatedLndOperations.get_tower_server_info(params);
 
     case LND_GRPC_OPERATION.VERIFY_MESSAGE:
       return await authenticatedLndOperations.verify_message(params);
-    
+
     case LND_GRPC_OPERATION.GET_FORWARDS_GRPC:
       return await authenticatedGrpcCalls.grpc_forwarding_history(params);
 
@@ -180,6 +189,35 @@ const PerformAuthenticatedOperation = async (params) => {
 
     case LND_GRPC_OPERATION.GET_CHANNEL_GRPC:
       return await authenticatedGrpcCalls.grpc_get_chan_info(params);
+
+    case LND_GRPC_OPERATION.WALLET_BALANCE_GPRC:
+      return await authenticatedGrpcCalls.grpc_wallet_balance(params);
+
+    case LND_GRPC_OPERATION.GET_INFO_GRPC:
+      return await authenticatedGrpcCalls.grpc_get_info(params);
+
+    case LND_GRPC_OPERATION.CHANNEL_INSIGHTS_GRPC:
+      return await authenticatedGrpcCalls.grpc_channel_insights(params);
+
+    case LND_GRPC_OPERATION.CLOSE_REPORTS_GRPC:
+      return await authenticatedGrpcCalls.grpc_close_report(params);
+
+    case LND_GRPC_OPERATION.EXCHANGE_RATE_GRPC:
+      return await authenticatedGrpcCalls.grpc_exchange_rate(params);
+
+    case LND_GRPC_OPERATION.NODE_AUDIT_GRPC:
+      return await authenticatedGrpcCalls.grpc_node_audit(params);
+
+    case LND_GRPC_OPERATION.OUTLIER_RECOMMENDATIONS_GRPC:
+      return await authenticatedGrpcCalls.grpc_outlier_recommendations(params);
+
+    case LND_GRPC_OPERATION.REVENUE_REPORT_GRPC:
+      return await authenticatedGrpcCalls.grpc_revenue_report(params);
+
+    case LND_GRPC_OPERATION.THRESHOLD_RECOMMENDATIONS_GRPC:
+      return await authenticatedGrpcCalls.grpc_threshold_recommendations(
+        params
+      );
 
     default:
       return { success: false, message: "Invalid operation" };
@@ -193,22 +231,28 @@ const PerformUnAuthenticatedOperation = async (params) => {
 
   switch (operation) {
     case LND_GRPC_UNAUTHENTICATED_OPERATION.CREATE_WALLET:
-      let create_wallet_resp = await unAuthenticatedLndOperations.create_wallet(params);
+      let create_wallet_resp = await unAuthenticatedLndOperations.create_wallet(
+        params
+      );
       return create_wallet_resp;
     case LND_GRPC_UNAUTHENTICATED_OPERATION.GET_WALLET_STATUS:
-      let get_wallet_status_resp = await unAuthenticatedLndOperations.get_wallet_status();
+      let get_wallet_status_resp =
+        await unAuthenticatedLndOperations.get_wallet_status();
       return get_wallet_status_resp;
     case LND_GRPC_UNAUTHENTICATED_OPERATION.UNLOCK_WALLET:
-      let unlock_wallet_resp = await unAuthenticatedLndOperations.unlock_wallet(params);
+      let unlock_wallet_resp = await unAuthenticatedLndOperations.unlock_wallet(
+        params
+      );
       return unlock_wallet_resp;
     case LND_GRPC_UNAUTHENTICATED_OPERATION.CREATE_SEED:
       let create_seed_resp = await unAuthenticatedLndOperations.create_seed();
       return create_seed_resp;
     default:
       return { success: false, message: "Invalid operation" };
-
   }
-}
+};
 
-
-module.exports={PerformAuthenticatedOperation,PerformUnAuthenticatedOperation}
+module.exports = {
+  PerformAuthenticatedOperation,
+  PerformUnAuthenticatedOperation,
+};
