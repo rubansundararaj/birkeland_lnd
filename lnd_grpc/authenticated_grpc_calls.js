@@ -44,6 +44,35 @@ class AuthenticatedGrpcCalls {
         });
       };  
 
+      grpc_closed_channels = async (params) => {
+        const { request,macaroon} = params;
+        const client = this.get_client(macaroon)
+        return new Promise((resolve, reject) => {
+          client.closedChannels(request, (err, response) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(response);
+            }
+          });
+        });
+      };  
+
+
+      grpc_fee_report_request = async (params) => {
+        const { request,macaroon} = params;
+        const client = this.get_client(macaroon)
+        return new Promise((resolve, reject) => {
+          client.FeeReportRequest(request, (err, response) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(response);
+            }
+          });
+        });
+      }; 
+
       grpc_get_chan_info = async (params) => {
         const { request,macaroon} = params;
         const client = this.get_client(macaroon)
@@ -77,6 +106,20 @@ class AuthenticatedGrpcCalls {
         const client = this.get_client(macaroon)
         return new Promise((resolve, reject) => {
           client.getInfo(request, (err, response) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(response);
+            }
+          });
+        });
+      }; 
+
+      grpc_list_invoices = async (params) => {
+        const { request,macaroon} = params;
+        const client = this.get_client(macaroon)
+        return new Promise((resolve, reject) => {
+          client.listInvoices(request, (err, response) => {
             if (err) {
               reject(err);
             } else {

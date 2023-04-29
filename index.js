@@ -218,6 +218,17 @@ const PerformAuthenticatedOperation = async (params) => {
       return await authenticatedGrpcCalls.grpc_threshold_recommendations(
         params
       );
+    
+    case LND_GRPC_OPERATION.CLOSED_CHANNELS_GRPC:
+      return await authenticatedGrpcCalls.grpc_closed_channels(
+        params
+      );
+
+    case LND_GRPC_OPERATION.LIST_INVOICES_GRPC:
+      return await authenticatedGrpcCalls.grpc_list_invoices(params);
+
+      case LND_GRPC_OPERATION.FEE_REPORT_REQUEST_GRPC:
+        return await authenticatedGrpcCalls.grpc_fee_report_request(params);
 
     default:
       return { success: false, message: "Invalid operation" };

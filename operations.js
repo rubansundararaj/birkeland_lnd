@@ -65,6 +65,9 @@ const LND_GRPC_OPERATION = {
     OUTLIER_RECOMMENDATIONS_GRPC : "outlier_recommissions_grpc", //62
     REVENUE_REPORT_GRPC : "revenue_reporter_grpc", //63
     THRESHOLD_RECOMMENDATIONS_GRPC : "threshold_recommendations_grpc", //64
+    LIST_INVOICES_GRPC : "list_invoices_grpc", //65
+    CLOSED_CHANNELS_GRPC : "closed_channels_grpc", //66
+    FEE_REPORT_REQUEST_GRPC : "fee_report_request_grpc", //67
 
   };
 
