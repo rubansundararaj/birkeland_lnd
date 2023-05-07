@@ -129,6 +129,33 @@ class AuthenticatedGrpcCalls {
         });
       }; 
 
+      grpc_query_routes = async (params) => {
+        const { request,macaroon} = params;
+        const client = this.get_client(macaroon)
+        return new Promise((resolve, reject) => {
+          client.queryRoutes(request, (err, response) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(response);
+            }
+          });
+        });
+      }; 
+
+      grpc_send_to_route_sync = async (params) => {
+        const { request,macaroon} = params;
+        const client = this.get_client(macaroon)
+        return new Promise((resolve, reject) => {
+          client.sendToRouteSync(request, (err, response) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(response);
+            }
+          });
+        });
+      }; 
       //Faraday Services
       grpc_channel_insights = async (params) => {
         const { request,macaroon} = params;

@@ -68,6 +68,8 @@ const LND_GRPC_OPERATION = {
     LIST_INVOICES_GRPC : "list_invoices_grpc", //65
     CLOSED_CHANNELS_GRPC : "closed_channels_grpc", //66
     FEE_REPORT_REQUEST_GRPC : "fee_report_request_grpc", //67
+    GRPC_QUERY_ROUTES : "grpc_query_routes", //68
+    GRPC_SEND_TO_ROUTE_SYNC : "grpc_send_to_route_sync", //69
 
   };
 
